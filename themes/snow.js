@@ -20,6 +20,10 @@ class SnowTooltip extends BaseTooltip {
 
   listen() {
     super.listen();
+    this.root.querySelector('a.ql-action').setAttribute('tabindex', '0');
+    this.root.querySelector('a.ql-remove').setAttribute('tabindex', '0');
+    this.root.querySelector('a.ql-preview').setAttribute('tabindex', '0');
+    // @ts-expect-error Fix me later
     this.root.querySelector('a.ql-action').addEventListener('click', event => {
       if (this.root.classList.contains('ql-editing')) {
         this.save();
@@ -38,6 +42,50 @@ class SnowTooltip extends BaseTooltip {
       event.preventDefault();
       this.hide();
     });
+    // @ts-expect-error Fix me later
+    this.root
+      .querySelector('a.ql-action')
+      .addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          if (this.root.classList.contains('ql-editing')) {
+            this.save();
+          } else {
+            // @ts-expect-error Fix me later
+            this.edit('link', this.preview.textContent);
+          }
+          event.preventDefault();
+        }
+      });
+    // @ts-expect-error Fix me later
+    this.root
+      .querySelector('a.ql-remove')
+      .addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          if (this.linkRange != null) {
+            const range = this.linkRange;
+            this.restoreFocus();
+            this.quill.formatText(range, 'link', false, Emitter.sources.USER);
+            delete this.linkRange;
+          }
+          event.preventDefault();
+          this.hide();
+        }
+      });
+    // @ts-expect-error Fix me later
+    this.root
+      .querySelector('a.ql-remove')
+      .addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+          if (this.linkRange != null) {
+            const range = this.linkRange;
+            this.restoreFocus();
+            this.quill.formatText(range, 'link', false, Emitter.sources.USER);
+            delete this.linkRange;
+          }
+          event.preventDefault();
+          this.hide();
+        }
+      });
     this.quill.on(
       Emitter.events.SELECTION_CHANGE,
       (range, oldRange, source) => {
@@ -72,8 +120,8 @@ class SnowTooltip extends BaseTooltip {
 SnowTooltip.TEMPLATE = [
   '<a class="ql-preview" rel="noopener noreferrer" target="_blank" href="about:blank"></a>',
   '<input type="text" data-formula="e=mc^2" data-link="https://quilljs.com" data-video="Embed URL">',
-  '<a class="ql-action"></a>',
-  '<a class="ql-remove"></a>',
+  '<a class="ql-action">Save</a>',
+  '<a class="ql-remove">Remove</a>',
 ].join('');
 
 class SnowTheme extends BaseTheme {

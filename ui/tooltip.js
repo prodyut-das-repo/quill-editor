@@ -47,6 +47,7 @@ class Tooltip {
   show() {
     this.root.classList.remove('ql-editing');
     this.root.classList.remove('ql-hidden');
+    this.root.querySelector('a.ql-action').innerHTML = 'Edit';
   }
 }
 

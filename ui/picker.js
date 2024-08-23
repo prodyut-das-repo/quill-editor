@@ -1,4 +1,5 @@
 import DropdownIcon from '../assets/icons/dropdown.svg';
+import colors from './color';
 
 let optionsCounter = 0;
 
@@ -49,6 +50,14 @@ class Picker {
     item.classList.add('ql-picker-item');
     if (option.hasAttribute('value')) {
       item.setAttribute('data-value', option.getAttribute('value'));
+      const color = colors.filter(
+        ele => ele.code === option.getAttribute('value'),
+      );
+      if (color && color.length > 0)
+        item.setAttribute('aria-label', color[0].name || 'Black');
+    }
+    if (!option.hasAttribute('value')) {
+      item.setAttribute('aria-label', 'Black');
     }
     if (option.textContent) {
       item.setAttribute('data-label', option.textContent);

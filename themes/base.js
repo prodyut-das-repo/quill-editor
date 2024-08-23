@@ -213,6 +213,7 @@ class BaseTooltip extends Tooltip {
   edit(mode = 'link', preview = null) {
     this.root.classList.remove('ql-hidden');
     this.root.classList.add('ql-editing');
+    this.root.querySelector('a.ql-action').innerHTML = 'Save';
     if (preview != null) {
       this.textbox.value = preview;
     } else if (mode !== this.root.getAttribute('data-mode')) {
@@ -246,10 +247,9 @@ class BaseTooltip extends Tooltip {
             Emitter.sources.USER,
           );
           delete this.linkRange;
-        } else {
-          this.restoreFocus();
-          this.quill.format('link', value, Emitter.sources.USER);
         }
+        this.restoreFocus();
+        this.quill.format('link', value, Emitter.sources.USER);
         this.quill.root.scrollTop = scrollTop;
         break;
       }

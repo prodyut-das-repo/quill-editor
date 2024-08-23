@@ -26,13 +26,11 @@ tooltipMargin = 8px
       overflow-x: hidden
       text-overflow: ellipsis
       vertical-align: top
-    a.ql-action::after
+    a.ql-action
       border-right: 1px solid borderColor
-      content: 'Edit'
       margin-left: tooltipMargin*2
       padding-right: tooltipMargin
-    a.ql-remove::before
-      content: 'Remove'
+    a.ql-remove
       margin-left: tooltipMargin
     a
       line-height: 26px
@@ -41,9 +39,8 @@ tooltipMargin = 8px
       display: none
     input[type=text]
       display: inline-block
-    a.ql-action::after
+    a.ql-action
       border-right: 0px
-      content: 'Save'
       padding-right: 0px
   .ql-tooltip[data-mode=link]::before
     content: "Enter link:"
