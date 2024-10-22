@@ -213,7 +213,7 @@ class BaseTooltip extends Tooltip {
   edit(mode = 'link', preview = null) {
     this.root.classList.remove('ql-hidden');
     this.root.classList.add('ql-editing');
-    this.root.querySelector('a.ql-action').innerHTML = 'Save';
+    this.root.querySelector('.ql-action').innerHTML = 'Save';
     if (preview != null) {
       this.textbox.value = preview;
     } else if (mode !== this.root.getAttribute('data-mode')) {

@@ -26,20 +26,20 @@ tooltipMargin = 8px
       overflow-x: hidden
       text-overflow: ellipsis
       vertical-align: top
-    a.ql-action
+    .ql-action
       border-right: 1px solid borderColor
       margin-left: tooltipMargin*2
       padding-right: tooltipMargin
-    a.ql-remove
+    .ql-remove
       margin-left: tooltipMargin
     a
       line-height: 26px
   .ql-tooltip.ql-editing
-    a.ql-preview, a.ql-remove
+    a.ql-preview, .ql-remove
       display: none
     input[type=text]
       display: inline-block
-    a.ql-action
+    .ql-action
       border-right: 0px
       padding-right: 0px
   .ql-tooltip[data-mode=link]::before
@@ -48,3 +48,6 @@ tooltipMargin = 8px
     content: "Enter formula:"
   .ql-tooltip[data-mode=video]::before
     content: "Enter video:"
+  .button-link
+    border: 0px solid black;
+    padding: 5px;

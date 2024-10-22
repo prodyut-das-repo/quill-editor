@@ -88,6 +88,7 @@ class Picker {
     label.innerHTML = DropdownIcon;
     label.tabIndex = '0';
     label.setAttribute('role', 'button');
+    label.setAttribute('aria-label', 'Table');
     label.setAttribute('aria-expanded', 'false');
     this.container.appendChild(label);
     return label;

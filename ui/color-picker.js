@@ -1,3 +1,4 @@
+import colors from './color';
 import Picker from './picker';
 
 class ColorPicker extends Picker {
@@ -5,6 +6,10 @@ class ColorPicker extends Picker {
     super(select);
     this.label.innerHTML = label;
     this.container.classList.add('ql-color-picker');
+    if (this.container.querySelector('.ql-picker-label'))
+      this.container
+        .querySelector('.ql-picker-label')
+        .setAttribute('aria-label', 'Text Color, black');
     Array.from(this.container.querySelectorAll('.ql-picker-item'))
       .slice(0, 7)
       .forEach(item => {
@@ -29,6 +34,13 @@ class ColorPicker extends Picker {
         colorLabel.style.fill = value;
       }
     }
+    if (this.container.querySelector('.ql-picker-label') && value)
+      this.container
+        .querySelector('.ql-picker-label')
+        .setAttribute(
+          'aria-label',
+          `Text Color, ${colors.filter(ele => ele.code === value)[0].name}`,
+        );
   }
 }
 

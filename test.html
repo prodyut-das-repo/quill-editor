@@ -33,9 +33,43 @@
 
     <!-- Initialize Quill editor -->
     <script>
-        const quill = new Quill('#editor', {
-            theme: 'snow',
-        });
+        var quill = new Quill('#editor', {
+                modules: {
+                    toolbar: [
+                        [{
+                            header: [1, 2, false]
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        ['image', 'code-block'],
+                        [{
+                            'color': ['#F00', '#0F0', '#00F', '#000', '#FFF', 'color-picker']
+                        }]
+                    ]
+                },
+                placeholder: 'Compose an epic...',
+                theme: 'snow' // or 'bubble'
+            });
+
+            function showColorPicker(value) {
+                if (value === 'color-picker') {
+                    var picker = document.getElementById('color-picker');
+                    if (!picker) {
+                        picker = document.createElement('input');
+                        picker.id = 'color-picker';
+                        picker.type = 'color';
+                        picker.style.display = 'none';
+                        picker.value = '#FF0000';
+                        document.body.appendChild(picker);
+
+                        picker.addEventListener('change', function () {
+                            quill.format('color', picker.value);
+                        }, false);
+                    }
+                    picker.click();
+                } else {
+                    quill.format('color', value);
+                }
+            }
     </script>
 </body>
 
